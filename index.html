@@ -119,6 +119,8 @@ Error message and password prompt
 
 <p>This <a class="tc-tiddlylink-external" href="http://tiddlywiki.com" rel="noopener noreferrer" target="_blank">TiddlyWiki</a> contains the following tiddlers:</p><p><ul>
 
+<li>::ってなんだ?</li>
+
 <li>$:/core</li>
 
 <li>$:/DefaultTiddlers</li>
@@ -136,6 +138,8 @@ Error message and password prompt
 <li>$:/state/toc/Cppの入出力-マニピュレータ?--81657105</li>
 
 <li>$:/state/toc/TableOfContents-基本拡張--81657105</li>
+
+<li>$:/state/toc/TableOfContents-基本拡張-497309061</li>
 
 <li>$:/state/toc/関数の拡張-複数の型に対応した関数--81657105</li>
 
@@ -225,6 +229,12 @@ Error message and password prompt
 
 <li>返り値をただ読むだけに使わせたい場合はconst</li>
 
+<li>名前空間</li>
+
+<li>名前空間を作ると管理しやすくなるぞ</li>
+
+<li>例外処理</li>
+
 <li>論理型</li>
 
 </ul>
@@ -237,6 +247,37 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
+<div created="20160914100638570" modified="20160914100830233" tags="名前空間" title="::ってなんだ?">
+<pre>!coutなどについていた苗字
+
+今まで苗字を省略してかけるようにしていたので、フルネームで呼び出してみる。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+```
+``using namespace std;``が消えている。
+
+!main関数
+```
+int main(void){
+	
+	std::cout &lt;&lt; &quot;Hello World&quot; &lt;&lt; std::endl;
+	return 0;
+}
+```
+coutやendlに''std::''が付いている。
+coutやendlは実はフルネームだと``std::cout``や``std::endl``というらしい。
+途中の
+``::``
+は''スコープ解決演算子''というらしい。
+バスコ=ダ=ガマに付いている''=''だと思っていい。
+
+!実行結果
+```
+Hello World
+```</pre>
+</div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWiki5 core" list="readme" plugin-priority="0" plugin-type="plugin" title="$:/core" type="application/json" version="5.1.13">
 <pre>{
     &quot;tiddlers&quot;: {
@@ -7909,14 +7950,17 @@ Error message and password prompt
 <div created="20160914055913111" modified="20160914055913111" title="$:/state/toc/TableOfContents-基本拡張--81657105">
 <pre>open</pre>
 </div>
+<div created="20160914100235996" modified="20160914100235996" title="$:/state/toc/TableOfContents-基本拡張-497309061">
+<pre>open</pre>
+</div>
 <div created="20160914084235331" modified="20160914084537046" title="$:/state/toc/関数の拡張-複数の型に対応した関数--81657105">
 <pre>close</pre>
 </div>
 <div created="20160914064320853" modified="20160914084817299" title="$:/state/toc/基本拡張-Cppの入出力--81657105">
 <pre>close</pre>
 </div>
-<div created="20160914085039843" modified="20160914085039843" title="$:/state/toc/基本拡張-newとdelete--81657105">
-<pre>open</pre>
+<div created="20160914085039843" modified="20160914100214885" title="$:/state/toc/基本拡張-newとdelete--81657105">
+<pre>close</pre>
 </div>
 <div created="20160914082445435" modified="20160914084805565" title="$:/state/toc/基本拡張-関数の拡張--81657105">
 <pre>close</pre>
@@ -7927,7 +7971,7 @@ Error message and password prompt
 <div created="20160914081718765" modified="20160914084730355" title="$:/state/toc/変数の拡張-定数型--81657105">
 <pre>close</pre>
 </div>
-<div list="reallocはどうすのか newとdelete" title="$:/StoryList">
+<div list="例外処理" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -7944,8 +7988,8 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20160914053023222" modified="20160914055925174" title="$:/temp/search">
-<pre></pre>
+<div created="20160914053023222" modified="20160914100225670" title="$:/temp/search">
+<pre>Table</pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.13">
 <pre>{
@@ -8563,7 +8607,7 @@ for文は0〜20までの値を10進数、8進数、16進数で表示させてい
 5桁左揃えで3つの進数の値が表示される。
 </pre>
 </div>
-<div caption="{{$:/language/SideBar/Contents/Caption}}" created="20160914051953891" list="基本拡張" list-after="$:/core/ui/SideBar/Open" modified="20160914053817124" tags="$:/tags/SideBar" title="TableOfContents" type="text/vnd.tiddlywiki">
+<div caption="{{$:/language/SideBar/Contents/Caption}}" created="20160914051953891" list="" list-after="$:/core/ui/SideBar/Open" modified="20160914100433591" tags="$:/tags/SideBar" title="TableOfContents" type="text/vnd.tiddlywiki">
 <pre>&lt;div class=&quot;tc-table-of-contents&quot;&gt;
 
 &lt;&lt;toc-selective-expandable 'TableOfContents'&gt;&gt;
@@ -8916,7 +8960,7 @@ int main(void){
 
 &lt;&lt;toc '関数の拡張'&gt;&gt;</pre>
 </div>
-<div created="20160914054014193" modified="20160914055911124" tags="TableOfContents" title="基本拡張" type="text/vnd.tiddlywiki">
+<div created="20160914054014193" list="基本拡張 何もしないプログラム Cppの入出力 変数の拡張 関数の拡張" modified="20160914100452932" tags="TableOfContents" title="基本拡張" type="text/vnd.tiddlywiki">
 <pre>&lt;&lt;toc '基本拡張'&gt;&gt;</pre>
 </div>
 <div created="20160914082658475" modified="20160914082824179" tags="関数の拡張" title="逆参照渡し">
@@ -9415,6 +9459,131 @@ int* const Fx3 (void){
 1
 ```
 値変更出来ないのがコメントアウトを消すと分かると思う。</pre>
+</div>
+<div created="20160914100555470" modified="20160914100847196" tags="基本拡張" title="名前空間">
+<pre>C++では全ての要素に名前空間という苗字の様な物を付けることが出来る。
+
+時々出てきた''std''やら''ios''というものが苗字になる。
+&lt;&lt;toc '名前空間'&gt;&gt;</pre>
+</div>
+<div created="20160914100904116" modified="20160914101051211" tags="名前空間" title="名前空間を作ると管理しやすくなるぞ">
+<pre>!名前空間を作ってみる。
+なんで苗字なるものが出来たのかって、そりゃ管理しやすくするためで、
+実際に自分で作って使うことが出来る。
+
+!ヘッダ
+```
+#include &lt;math.h&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+namespace Test{
+	typedef struct{
+		float x, y;
+	}POINT;
+	
+	float Fx(POINT a, POINT b);
+}
+```
+名前空間を作る場合は
+
+```
+namespace 苗字{
+//内容
+}
+```
+という書き方をする。
+構造体と関数のプロトタイプ宣言を名前空間内で行っている。
+
+!メイン関数
+```
+int main(void){
+	
+	Test :: POINT a,b;
+	a.x = 1;
+	a.y = 2;
+	b.x = 3;
+	b.y = 4;
+	
+	cout &lt;&lt; Test :: Fx(a, b) &lt;&lt; endl;
+	
+	return 0;
+}
+```
+名前空間内のものにアクセスするには前回のものと同様``::``を使う。
+
+!関数の実装
+```
+namespace Test{
+	float Fx(POINT a, POINT b){
+		float x,y;
+		x = b.x - a.x;
+		y = b.y - a.y;
+		return sqrt(x * x + y * y);
+	}
+}
+```
+名前空間は分けて書くことが出来る。
+
+!実行結果
+```
+2.82843
+```</pre>
+</div>
+<div created="20160914101139874" modified="20160914101355254" tags="基本拡張" title="例外処理">
+<pre>C++でデバッグが容易になるように追加されたのが``try``,``throw``,``catch``文だ。
+
+バグが起きる部分を``try``で囲み、怪しい変数を``throw``し、
+``catch``でその中身を確認する等の処理が出来る。
+実際に見てみる。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+
+void Fx(void);
+```
+関数を作っている。それ以外は普通。
+
+!main関数
+```
+int main(void){
+	
+	try{
+		Fx();
+		//throw 42.195f;
+	}
+	catch(int i){
+		cout &lt;&lt; &quot;Get Message :&quot; &lt;&lt; i &lt;&lt; endl;
+	}
+	catch(float f){
+		cout &lt;&lt; &quot;Get Message :&quot; &lt;&lt; f &lt;&lt; endl;
+	}
+	
+	return 0;
+}
+```
+途中''try''でくくった場所で怪しい変数を''throw''を使って投げている。
+変数を''catch''で受け取り、その値を確認するなどの処理が出来る。
+''catch後のカッコ''はそのcatchが何を受け取って実行されるかを書く。
+整数型ならばintだったり、実数だったらfloatだったり。
+引数の様に扱える。
+
+!Fx関数
+```
+void Fx(void){
+	throw 100;
+}
+```
+関数の中にthrowを書いても、その関数がtry内にあれば、
+catchが実行される。
+
+!実行結果
+```
+Get Message :100
+```
+コメントアウトを変更してみて、動作を確認するといいと思う。</pre>
 </div>
 <div created="20160914080933435" modified="20160914081205405" tags="変数の拡張" title="論理型">
 <pre>ごく普通に使われる事が一般的になりつつあるbool型はC++から拡張された。
