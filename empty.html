@@ -137,7 +137,15 @@ Error message and password prompt
 
 <li>$:/state/toc/TableOfContents-基本拡張--81657105</li>
 
+<li>$:/state/toc/関数の拡張-複数の型に対応した関数--81657105</li>
+
 <li>$:/state/toc/基本拡張-Cppの入出力--81657105</li>
+
+<li>$:/state/toc/基本拡張-関数の拡張--81657105</li>
+
+<li>$:/state/toc/基本拡張-変数の拡張--81657105</li>
+
+<li>$:/state/toc/変数の拡張-定数型--81657105</li>
 
 <li>$:/StoryList</li>
 
@@ -149,6 +157,8 @@ Error message and password prompt
 
 <li>$:/themes/tiddlywiki/vanilla</li>
 
+<li>2つ以上の引数を持ってみる。</li>
+
 <li>cinとかは何者？</li>
 
 <li>CppのHello World.</li>
@@ -156,6 +166,8 @@ Error message and password prompt
 <li>Cppの入出力</li>
 
 <li>Cppの入力</li>
+
+<li>defineのように使う</li>
 
 <li>precisionの実験</li>
 
@@ -165,17 +177,45 @@ Error message and password prompt
 
 <li>TableOfContents</li>
 
+<li>デフォルト引数</li>
+
 <li>ファイル入出力まで出来る</li>
+
+<li>ポインタと定数</li>
+
+<li>まずは1つで分かりやすく</li>
 
 <li>マニピュレータ?</li>
 
 <li>何もしないプログラム</li>
 
+<li>関数の拡張</li>
+
 <li>基本拡張</li>
+
+<li>逆参照渡し</li>
+
+<li>参照型</li>
+
+<li>参照型引数</li>
 
 <li>色々な出力</li>
 
+<li>定数型</li>
+
+<li>同じ名前で違う動作</li>
+
+<li>複数の型に対応した関数</li>
+
 <li>文字列から入出力</li>
+
+<li>変更する必要がない場合はconst</li>
+
+<li>変数の拡張</li>
+
+<li>返り値をただ読むだけに使わせたい場合はconst</li>
+
+<li>論理型</li>
 
 </ul>
 </p>
@@ -7850,7 +7890,7 @@ Error message and password prompt
 <div created="20160914052842642" modified="20160914052842642" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20160914053018705" modified="20160914054005611" title="$:/state/tab/sidebar--1835078512">
+<div created="20160914053018705" modified="20160914081717619" title="$:/state/tab/sidebar--1835078512">
 <pre>TableOfContents</pre>
 </div>
 <div created="20160914065631724" modified="20160914075855167" title="$:/state/toc/Cppの入出力-マニピュレータ?--81657105">
@@ -7859,10 +7899,22 @@ Error message and password prompt
 <div created="20160914055913111" modified="20160914055913111" title="$:/state/toc/TableOfContents-基本拡張--81657105">
 <pre>open</pre>
 </div>
-<div created="20160914064320853" modified="20160914064557558" title="$:/state/toc/基本拡張-Cppの入出力--81657105">
+<div created="20160914084235331" modified="20160914084235331" title="$:/state/toc/関数の拡張-複数の型に対応した関数--81657105">
 <pre>open</pre>
 </div>
-<div list="Cppの入出力 文字列から入出力 cinとかは何者？ Cppの入力" title="$:/StoryList">
+<div created="20160914064320853" modified="20160914080812786" title="$:/state/toc/基本拡張-Cppの入出力--81657105">
+<pre>close</pre>
+</div>
+<div created="20160914082445435" modified="20160914084153901" title="$:/state/toc/基本拡張-関数の拡張--81657105">
+<pre>open</pre>
+</div>
+<div created="20160914081207566" modified="20160914081928657" title="$:/state/toc/基本拡張-変数の拡張--81657105">
+<pre>close</pre>
+</div>
+<div created="20160914081718765" modified="20160914081927977" title="$:/state/toc/変数の拡張-定数型--81657105">
+<pre>close</pre>
+</div>
+<div list="2つ以上の引数を持ってみる。" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -7990,6 +8042,55 @@ Error message and password prompt
         }
     }
 }</pre>
+</div>
+<div created="20160914084318760" modified="20160914084523736" tags="複数の型に対応した関数" title="2つ以上の引数を持ってみる。">
+<pre>複数の型を引数に貰いたい場合のテンプレート関数を見てみる。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+template &lt;typename T1, typename T2&gt;
+T1 Plus(T1 a, T2 b);
+```
+
+templateの山括弧部分が
+
+``&lt;typename T1, typename T2&gt;``
+
+とコンマ区切りで2つ定義している。
+そして関数の引数の部分を見てみると
+
+``(T1 a, T2 b)``
+
+と山括弧で定義した2つを使っている。
+この様にして複数の型を引数に持つ関数を作ることが出来る。
+今回の返り値は最初の引数に合わせた型で出力されるようにしている。
+
+!main文
+```
+int main(void){
+	
+	cout &lt;&lt; Plus(51.4, 31) &lt;&lt; endl;
+	
+	return 0;
+}
+```
+まぁ見ての通りです。
+
+!関数の実装
+```
+template &lt;typename T1, typename T2&gt;
+T1 Plus(T1 a, T2 b){
+	return a + b;
+}
+```
+複数の場合も単体の場合と変わりません。
+
+!実行結果
+```
+82.4
+```</pre>
 </div>
 <div created="20160914070309612" modified="20160914070522169" tags="Cppの入出力" title="cinとかは何者？">
 <pre>!一行読む方法
@@ -8172,6 +8273,38 @@ int main(){
 年齢：21
 ```</pre>
 </div>
+<div created="20160914081516404" modified="20160914081716244" tags="定数型" title="defineのように使う">
+<pre>!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+```
+特に説明なし
+
+!main関数
+```
+int main(void){
+	
+	const float Py = 3.14f;
+	float r;
+	//Py += 1.0f;
+	
+	cin  &gt;&gt; r;
+	cout &lt;&lt; r * r * Py &lt;&lt; endl;
+	
+	
+	return 0;
+}
+```
+``const``を前に付けたために途中での変更が効かなくなっている。
+それはコメントアウトを外してみるとよく分かる。
+
+!実行結果
+```
+20
+1256
+```</pre>
+</div>
 <div created="20160914065706344" modified="20160914065809603" tags="マニピュレータ?" title="precisionの実験">
 <pre>!ヘッダ
 ```
@@ -8316,6 +8449,55 @@ for文は0〜20までの値を10進数、8進数、16進数で表示させてい
 
 &lt;/div&gt;</pre>
 </div>
+<div created="20160914082154952" modified="20160914082443261" tags="関数の拡張" title="デフォルト引数">
+<pre>関数を作る時に、引数にデフォルトの値を与えることができる。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+
+void print(int n = 10);
+```
+プロトタイプ宣言に``print``という関数を宣言している。
+その引数は``int``型であるが、なんと``10``を代入している。
+
+!main関数
+```
+int main(void){
+	
+	print();
+	print(100);
+	
+	
+	return 0;
+}
+```
+``print``関数を2回呼び出している。この時最初の``print``関数は引数に何も渡していない。
+その後の``print``関数には100を引数を渡している。
+
+!print関数の実装
+```
+void print(int n){
+	
+	cout &lt;&lt; n &lt;&lt; endl;
+	return ;
+}
+```
+``print``関数の実際は``cout``を使って引数を出力しているだけ。
+
+!実行結果
+問題の実行結果がこちら
+
+```
+10
+100
+```
+printに何も渡していないのにエラーにならず、10が出力されており、
+100を渡した方も特に何もなくごく普通に100が出ている。
+''関数宣言、又は実装のどちらか一方''で代入の形で初期値を設定することが出来る。
+初期値のまま実行する場合は引数に何も渡さなくても動作する。</pre>
+</div>
 <div created="20160914070803001" modified="20160914071908706" tags="Cppの入出力" title="ファイル入出力まで出来る">
 <pre>!ファイル入出力
 
@@ -8380,6 +8562,118 @@ This is test4
 ``ios :: in | ios :: binary``
 </pre>
 </div>
+<div created="20160914081721570" modified="20160914081828360" tags="定数型" title="ポインタと定数">
+<pre>!ポインタとconstが混ざるとカオス
+本当によく分かんなくなるけど、constの位置によって動作が変わってくる。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+```
+説明特になし
+
+!main関数
+```
+i#include &lt;iostream&gt;
+using namespace std;
+
+int main(void){
+	
+	char str[] = &quot;This is Test.&quot;;
+	const char * cp  = str;
+	char * const cp2 = str;
+	
+	cp2[0] = 'A'; //cp[0] = 'A';
+	cp ++;        //cp2 ++;
+	
+	
+	cout &lt;&lt; &quot;Str is\n-&gt;&quot;  &lt;&lt; str &lt;&lt; endl;
+	cout &lt;&lt; &quot;CP is \n-&gt;&quot;  &lt;&lt; cp  &lt;&lt; endl;
+	cout &lt;&lt; &quot;CP2 is \n-&gt;&quot; &lt;&lt; cp2 &lt;&lt; endl; 
+	
+	return 0;
+}
+```
+今回はどの様な動作をするのかを実験するため文字列とポインタ二種類を作っている。
+片方は''定数文字ポインタ型''で、もう一方が''文字ポインタ定数型''です。
+それぞれの説明は以下
+
+|!型名|!文字列変更|!アドレス変更|
+|定数文字ポインタ型|×|○|
+|文字ポインタ定数型|○|×|
+
+!実行結果
+```
+Str is
+-&gt;Ahis is Test.
+CP is 
+-&gt;his is Test.
+CP2 is 
+-&gt;Ahis is Test.
+```
+コメントアウトを逆転させるとエラーが出ます。</pre>
+</div>
+<div created="20160914083925951" modified="20160914084243792" tags="複数の型に対応した関数" title="まずは1つで分かりやすく">
+<pre>!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+
+template &lt;typename Type&gt;
+Type Abs(Type num);
+
+```
+テンプレート関数の書き方がイミフなので説明。
+
+``template&lt;typename 名前&gt; 返り値 関数名(引数群);``
+
+と書きます。長いので二行に分けるのが一般的みたいです。
+
+''名前''の部分に型が当てはめられます。
+今回の場合''名前''部分に''Type''という名前をつけています。
+
+その後の関数を見てみます。
+返り値が''Type''そして引数も''Type''となっています。
+この関数に例えば''int型''の値が与えられた場合、関数の''Type''部分が全て''int''な関数が作られます。
+
+同様に''float型''が与えられた場合も、関数の''Type''部分が全て''float''な関数が作られます。
+関数の中身はオーバーロードのものと同一です。
+
+!main関数
+```
+int main(void){
+	
+	double d;
+	int i;
+	
+	cin &gt;&gt; d;
+	i = d;
+	cout &lt;&lt; Abs(i) &lt;&lt; &quot;:&quot; &lt;&lt; Abs(d) &lt;&lt; endl;
+	
+	return 0;
+}
+```
+内容はオーバーロードと同じです。
+実数型で入力を受け取り、関数に投げています。
+この時、片方は整数型に型変換されたものを渡しています。
+
+!関数の実装
+```
+template &lt;typename Type&gt;
+Type Abs(Type num){
+	return num &lt; 0 ? num * -1 : num;
+}
+```
+実装時の書き方もほとんどプロトタイプ宣言と同じです。
+中身の書き方も通常の関数と同様に行う事ができます。
+
+!実行結果
+```
+-42.195
+42:42.195
+```</pre>
+</div>
 <div created="20160914064611356" modified="20160914065831354" tags="Cppの入出力" title="マニピュレータ?">
 <pre>今まで改行して表示する時に``endl``というものを使いました。
 
@@ -8430,8 +8724,167 @@ int main(){
 
 ソースの拡張子は''xxxx.cpp''になります。</pre>
 </div>
+<div created="20160914082029348" modified="20160914082120794" tags="基本拡張" title="関数の拡張">
+<pre>次は関数の拡張です。
+これら拡張はクラスの''メソッド''でも有効です。
+メソッドとは''クラス内に含まれる関数の事''です。
+オブジェクト指向はカタカナ多すぎ。
+
+&lt;&lt;toc '関数の拡張'&gt;&gt;
+
+!!デフォルト引数
+[[引数に初期化|DefaultArgs]]
+
+!参照型引数
+[[参照渡し|ReferenceArgs]]
+
+!参照型返り値
+[[逆参照渡し|ReferenceReturn]]
+
+!定数型引数
+[[変更する必要がない場合はconst|ConstArgs]]
+
+!定数型返り値
+[[返り値をただ読むだけに使わせたい場合はconst|ConstReturn]]
+
+!オーバーロード
+[[同じ名前で違う動作|OverLoad]]
+
+!テンプレート
+[[複数の型に対応した関数|TemplateFunction]]</pre>
+</div>
 <div created="20160914054014193" modified="20160914055911124" tags="TableOfContents" title="基本拡張" type="text/vnd.tiddlywiki">
 <pre>&lt;&lt;toc '基本拡張'&gt;&gt;</pre>
+</div>
+<div created="20160914082658475" modified="20160914082824179" tags="関数の拡張" title="逆参照渡し">
+<pre>参照型返り値を使うと関数の外から関数の中の変数を操作する事ができる。
+えっ！？
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+
+int&amp; Fx(void);
+```
+参照型を返り値に持つ``Fx``という関数を宣言している
+
+!main関数
+```
+int main(void){
+	
+	Fx() = 0; cout &lt;&lt; Fx() &lt;&lt; endl;
+	Fx() ++;  cout &lt;&lt; Fx() &lt;&lt; endl;
+	
+	return 0;
+}
+```
+Fxを呼び出している。そして``Fx() = 0``と関数なのに変数みたいなことしてる。
+わけがわからない。
+
+!Fxの実装
+```
+int&amp; Fx(void){
+	static int i;
+	return i;
+}
+```
+静的変数を作り、それを返り値として渡している。
+静的変数なので関数を抜けてもそのメモリは解放されずに残る。
+メモリに残るが、プログラム終了時に消えてくれるはず。
+
+!実行結果
+```
+0
+1
+```
+参照型として帰ってくるので、返り値が参照している空間の値を操作することが出来る。
+きもい。</pre>
+</div>
+<div created="20160914081227089" modified="20160914081340133" tags="変数の拡張" title="参照型">
+<pre>ポインタ型に拡張が加わりました。
+
+ある変数の中身を参照する方法に今まではポインタを使っていましたが、
+参照型を使う方法が増えました。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+```
+
+!main関数
+```
+int main(void){
+	
+	int i;
+	int &amp;ref = i;
+	
+	i = 0;
+	ref ++;
+	cout &lt;&lt; i &lt;&lt; endl &lt;&lt; ref &lt;&lt; endl;
+	
+	return 0;
+}
+```
+参照型の変数宣言は``型名 &amp;``となる。
+参照型は''初期化時に必ず参照元を宣言しなければならない。''という制限があります。
+で、何に使うのコレってなるわけですが、
+''主に''関数やメソッドの参照渡しに使われます。
+
+!実行結果
+```
+1
+1
+```
+</pre>
+</div>
+<div created="20160914082510091" modified="20160914082627833" tags="関数の拡張" title="参照型引数">
+<pre>これまで参照渡しをする場合、その引数のアドレスを引数で与え、ポインタ型で受け取り、
+中でポインタの操作をしなければならなかった。それが参照型を使うことで簡単になる。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+
+void increment(int &amp; a);
+```
+incrementという関数の引数が参照型になっている。
+
+!main関数
+```
+int main(void){
+	
+	int a = 10;
+	
+	increment(a);
+	
+	cout &lt;&lt; a &lt;&lt; endl;
+	
+	return 0;
+}
+```
+aという引数を10で初期化し、それを``increment``関数にごく普通に値渡しする様にaを与えている。
+それを出力して出力結果を見てみる。
+
+!increment関数
+```
+void increment(int &amp; a){
+	
+	a ++;
+	return;
+}
+```
+参照型でもらった値をインクリメントしている。
+ただそれだけの関数で、以下がその出力結果。
+
+!出力結果
+```
+11
+```
+参照渡しをした様にしっかりmain関数のaの値がインクリメントされていた。
+</pre>
 </div>
 <div created="20160914064344496" modified="20160914064534316" tags="Cppの入出力" title="色々な出力">
 <pre>printfが文字以外にも様々な物を出力出来たように、
@@ -8476,6 +8929,86 @@ My name is leico.
 I am 21 years old.
 ```</pre>
 </div>
+<div created="20160914081411041" modified="20160914081455334" tags="変数の拡張" title="定数型">
+<pre>constを頭に付けた変数は初期化以降、変更が出来なくなり一種defineの様に機能する。
+ちょっと長くなるので2つに分ける。
+
+&lt;&lt;toc '定数型'&gt;&gt;
+
+!defineの様に使う。
+[[普通なconst|ConstValueDef]]
+
+!ポインタとconstのカオス
+[[ポインタと混ざってカオス|ConstValuePointer]]</pre>
+</div>
+<div created="20160914083517923" modified="20160914083629837" tags="関数の拡張" title="同じ名前で違う動作">
+<pre>同じ名前でも違う動作を行う事が出来る様な拡張をオーバーロードという。
+オーバーロードは''関数の引数の差異''で機能を分ける事が出来る。
+''同一の引数で機能を分ける事はできない。返り値だけ違うという場合もアウト。''
+その例として絶対値の関数を作ってみた。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+
+int   Abs(int   num);
+float Abs(float num);
+```
+絶対値を求める関数Absを整数と小数の2パターンつくっている。
+
+```
+int main(void){
+	
+	int   i;
+	float f;
+	
+	cin &gt;&gt; f;
+	
+	i = f;
+	cout &lt;&lt; Abs(i) &lt;&lt; &quot;:&quot; &lt;&lt; Abs(f) &lt;&lt; endl; 
+	
+	return 0;
+}
+```
+実数で入力を受け取り、それぞれを呼び出している。
+
+!整数の絶対値
+```
+int Abs(int num){
+	return num &lt; 0 ? num * -1 : num;
+}
+```
+整数で受け取り、整数で返している。
+
+!実数の絶対値
+```
+float Abs(float num){
+	return num &lt; 0 ? num * -1 : num;
+}
+```
+実数で受け取り、実数で返している。
+
+!実行結果
+```
+-21.5643
+21:21.5643
+```</pre>
+</div>
+<div created="20160914083644076" modified="20160914084303230" tags="関数の拡張" title="複数の型に対応した関数">
+<pre>!イミフ関数拡張
+テンプレートという変態拡張がC++で追加されました。
+テンプレートを使うと様々な型に対応した関数が作れるようになります。
+分かりにくいので2つに分けます。
+
+&lt;&lt;toc '複数の型に対応した関数'&gt;&gt;
+
+!引数が一つの場合のテンプレート
+[[まずは一つでわかりやすく。|TemplateFunctionArg]]
+
+!引数が複数の場合のテンプレート
+[[2つ以上の引数を持ってみる。|TemplateFunctionArgs]]</pre>
+</div>
 <div created="20160914071937554" modified="20160914072104862" tags="Cppの入出力" title="文字列から入出力">
 <pre>わけがわからない拡張があります。
 
@@ -8512,6 +9045,225 @@ This
 is
 a
 pen.
+```</pre>
+</div>
+<div created="20160914082909741" modified="20160914083045738" tags="関数の拡張" title="変更する必要がない場合はconst">
+<pre>constが付くと変更が出来なくなるというのを変数拡張の辺りでやっているはず。
+それを引数で使うとどうなるのかをやってみる。
+基本的にその値を変更する必要がない場合、constを付けておくと事故が減る。
+今回は普通の変数にconstを付けるような事はしない(結果丸見えだし)で、ポインタや参照型の実験をしている。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+
+void Fx(const int&amp; value);
+void Fx2(const char * test);
+void Fx3(char * const test);
+```
+実行した結果を確認する3つの関数を作っている。
+それぞれ参照型、定数文字ポインタ型、文字ポインタ定数型を引数に持つ関数である。
+
+!main文
+```
+int main(void){
+	
+	char str[] = &quot;This is a Apple.&quot;;
+	char *cp = str;
+	
+	Fx(100);
+	Fx2(cp);
+	Fx3(cp);
+	
+	return 0;
+}
+```
+文字ポインタ系にはThis is an Appleを渡している。
+参照型には数字を渡している。
+
+!参照型の関数
+```
+void Fx(const int&amp; value){
+	
+	//value ++;
+	int test = value;
+	
+	cout &lt;&lt; test &lt;&lt; endl;
+	
+	return;
+}
+```
+コメントアウトを外してみれば分かるが、変更しようとするとエラーが出る。
+いくら参照型だろうと参照先の変数は変更出来ない様だ。
+
+!定数文字ポインタ型関数
+```
+void Fx2(const char * test){
+	
+	test ++;
+	//(*test) = 'B';
+	
+	cout &lt;&lt; test &lt;&lt; endl;
+	
+	return;
+}
+```
+こちらもコメントアウトを外すとエラーが出る。
+
+!文字ポインタ定数型関数
+```
+void Fx3(char * const test){
+
+	//test ++;
+	(*test) = 'B';
+	
+	cout &lt;&lt; test &lt;&lt; endl;
+	
+	return;
+}
+```
+上に同じ。
+
+!実行結果
+```
+100
+his is a Apple.
+Bhis is a Apple.
+```</pre>
+</div>
+<div created="20160914080833075" modified="20160914080914896" tags="基本拡張" title="変数の拡張">
+<pre>&lt;&lt;toc '変数の拡張'&gt;&gt;</pre>
+</div>
+<div created="20160914083113420" modified="20160914083454826" tags="関数の拡張" title="返り値をただ読むだけに使わせたい場合はconst">
+<pre>次はconst指定した返り値を持つ関数を見てみる。
+コレも普通の場合は予想出来るので参照型とかポインタとかの実験をしている。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+const int&amp;  Fx  (void);
+const int*  Fx2 (void);
+int*  const Fx3 (void);
+```
+参照型、定数ポインタ型、整数ポインタ定数型を返り値に持つ関数を宣言している。
+
+!main文
+```
+int main(void){
+	
+	cout &lt;&lt; Fx() &lt;&lt; endl;
+	//Fx() = 100; //Error
+	const int*  test1 = Fx2();
+	int*  const test2 = Fx3();
+	
+	test1 ++;
+	//*test1 = 0; //Error
+	//test2 ++;   //Error
+	*test2 = 1;
+	
+	cout &lt;&lt; *test1 &lt;&lt; endl;
+	cout &lt;&lt; *test2 &lt;&lt; endl;
+	
+	test1 --;
+	
+	delete[] test1;
+	delete[] test2;
+	
+	return 0;
+}
+```
+長いが仕方ない。
+それぞれの作成を関数を使うことで行っている。staticや何か自分で作ったクラスを使わせる場合に重宝するかもしれない方法。
+
+配列を削除するため、``delete``演算子に``[]``がついている。
+
+!constな参照型が返り値の関数
+```
+const int&amp; Fx(void){
+	
+	static int a;
+	return a;
+}
+```
+staticを使って関数消滅後もメモリ上に整数型が残るようにしている。
+返り値はごく普通にintを渡しているが、これで参照型になる。
+
+!定数ポインタ型が返り値の関数
+```
+const int* Fx2 (void){
+	
+	return new int[2];
+}
+```
+ここで''new演算子''が出てきたが、軽く説明すると''領域確保してそのアドレスが帰ってくる演算子''である。
+対になる''delete演算子''がmain関数上にある。これはfree関数と同じ働きをする。
+新しく領域確保した場所の先頭アドレスを返している。
+
+!整数ポインタ定数型が返り値の関数
+```
+int* const Fx3 (void){
+	return new int[2];
+}
+```
+返り値が違うだけで内容は先程と同じ。
+
+!実行結果
+```
+0
+0
+1
+```
+値変更出来ないのがコメントアウトを消すと分かると思う。</pre>
+</div>
+<div created="20160914080933435" modified="20160914081205405" tags="変数の拡張" title="論理型">
+<pre>ごく普通に使われる事が一般的になりつつあるbool型はC++から拡張された。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+```
+
+!main関数
+
+```
+int main(void){
+	
+	bool b = false;
+	char buff = '\0';
+	
+	cout &lt;&lt; &quot;Please Type 1&quot; &lt;&lt; endl &lt;&lt; &quot;-&gt;&quot; &lt;&lt; flush;
+	cin &gt;&gt; buff;
+	
+	b = ('1' == buff);
+	
+	if(b)
+		cout &lt;&lt; &quot;TRUE&quot; &lt;&lt; endl;
+	else 
+		cout &lt;&lt; &quot;FALSE&quot; &lt;&lt; endl;
+	
+	cout &lt;&lt; &quot;bool size is &quot; &lt;&lt; sizeof(b) &lt;&lt; endl;
+	
+	return 0;
+}
+```
+
+bool型bを作っている。途中の行``b = ('1' == buff);``の様に比較演算結果を代入することが出来る。
+
+基本的には``ture``か``false``を代入する事に使われるけれど。
+
+''という事で変数名がtrueやfalseという名前を使うことができなくなりました。''
+
+bool型のサイズは''1byte''らしい。
+
+!実行結果
+```
+Please Type 1
+-&gt;1
+TRUE
+bool size is 1
 ```</pre>
 </div>
 
