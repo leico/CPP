@@ -141,6 +141,8 @@ Error message and password prompt
 
 <li>$:/state/toc/基本拡張-Cppの入出力--81657105</li>
 
+<li>$:/state/toc/基本拡張-newとdelete--81657105</li>
+
 <li>$:/state/toc/基本拡張-関数の拡張--81657105</li>
 
 <li>$:/state/toc/基本拡張-変数の拡張--81657105</li>
@@ -169,7 +171,11 @@ Error message and password prompt
 
 <li>defineのように使う</li>
 
+<li>newとdelete</li>
+
 <li>precisionの実験</li>
+
+<li>reallocはどうすのか</li>
 
 <li>set/resetiosflagsの実験</li>
 
@@ -189,6 +195,8 @@ Error message and password prompt
 
 <li>何もしないプログラム</li>
 
+<li>可変長配列を作る</li>
+
 <li>関数の拡張</li>
 
 <li>基本拡張</li>
@@ -204,6 +212,8 @@ Error message and password prompt
 <li>定数型</li>
 
 <li>同じ名前で違う動作</li>
+
+<li>配列を作る</li>
 
 <li>複数の型に対応した関数</li>
 
@@ -7893,28 +7903,31 @@ Error message and password prompt
 <div created="20160914053018705" modified="20160914081717619" title="$:/state/tab/sidebar--1835078512">
 <pre>TableOfContents</pre>
 </div>
-<div created="20160914065631724" modified="20160914075855167" title="$:/state/toc/Cppの入出力-マニピュレータ?--81657105">
+<div created="20160914065631724" modified="20160914084816383" title="$:/state/toc/Cppの入出力-マニピュレータ?--81657105">
 <pre>close</pre>
 </div>
 <div created="20160914055913111" modified="20160914055913111" title="$:/state/toc/TableOfContents-基本拡張--81657105">
 <pre>open</pre>
 </div>
-<div created="20160914084235331" modified="20160914084235331" title="$:/state/toc/関数の拡張-複数の型に対応した関数--81657105">
+<div created="20160914084235331" modified="20160914084537046" title="$:/state/toc/関数の拡張-複数の型に対応した関数--81657105">
+<pre>close</pre>
+</div>
+<div created="20160914064320853" modified="20160914084817299" title="$:/state/toc/基本拡張-Cppの入出力--81657105">
+<pre>close</pre>
+</div>
+<div created="20160914085039843" modified="20160914085039843" title="$:/state/toc/基本拡張-newとdelete--81657105">
 <pre>open</pre>
 </div>
-<div created="20160914064320853" modified="20160914080812786" title="$:/state/toc/基本拡張-Cppの入出力--81657105">
+<div created="20160914082445435" modified="20160914084805565" title="$:/state/toc/基本拡張-関数の拡張--81657105">
 <pre>close</pre>
 </div>
-<div created="20160914082445435" modified="20160914084153901" title="$:/state/toc/基本拡張-関数の拡張--81657105">
-<pre>open</pre>
-</div>
-<div created="20160914081207566" modified="20160914081928657" title="$:/state/toc/基本拡張-変数の拡張--81657105">
+<div created="20160914081207566" modified="20160914084731108" title="$:/state/toc/基本拡張-変数の拡張--81657105">
 <pre>close</pre>
 </div>
-<div created="20160914081718765" modified="20160914081927977" title="$:/state/toc/変数の拡張-定数型--81657105">
+<div created="20160914081718765" modified="20160914084730355" title="$:/state/toc/変数の拡張-定数型--81657105">
 <pre>close</pre>
 </div>
-<div list="2つ以上の引数を持ってみる。" title="$:/StoryList">
+<div list="reallocはどうすのか newとdelete" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8305,6 +8318,15 @@ int main(void){
 1256
 ```</pre>
 </div>
+<div created="20160914084642457" modified="20160914084901154" tags="基本拡張" title="newとdelete">
+<pre>!new演算子とdelete演算子
+C++になってからnew演算子とdelete演算子が追加された。
+これらはmalloc関数やfree関数と同様の機能になる。
+new/delete演算子が作られたのはそれぞれ領域確保する時に、
+''コンストラクタ''、''デストラクタ''と呼ばれる初期化、消滅処理が必ず行われる仕様になっている。
+
+&lt;&lt;toc 'newとdelete'&gt;&gt;</pre>
+</div>
 <div created="20160914065706344" modified="20160914065809603" tags="マニピュレータ?" title="precisionの実験">
 <pre>!ヘッダ
 ```
@@ -8343,6 +8365,105 @@ Zoot         1.2
 Jimmy         35
 Al       6.5e+02
 Stan     4.4e+03
+```</pre>
+</div>
+<div created="20160914085221981" modified="20160914085448898" tags="newとdelete" title="reallocはどうすのか">
+<pre>new/deleteの練習にreallocな関数を作ってみる。
+そういうことをする場合は''list''や''vector''を使えっていうのがC++らしい。
+
+!ヘッダ
+```
+#include&lt;iostream&gt;
+using namespace std;
+
+int *Renew(int *array, int oldnum, int newnum);
+```
+大きさ変換用の関数を作っている。
+
+|!第一引数|配列|
+|!第二引数|配列の長さ|
+|!第三引数|新しい配列の長さ|
+としている。
+多分もっと綺麗な方法がC++だとかける。
+
+!main関数
+```
+int main(void){
+	
+	int num;
+	cout &lt;&lt; &quot;Input number of Array&quot; &lt;&lt;endl;
+	cin &gt;&gt; num;
+	
+	int *array = new int[num];
+	
+	for(int i = 0 ; i &lt; num ; i ++)
+		array[i] = i * i;
+	
+	int newnum;
+	cout &lt;&lt; &quot;Input New number of Array&quot; &lt;&lt; endl;
+	cin &gt;&gt; newnum;
+	
+	
+	int *temp = Renew(array, num, newnum);
+	
+	if(NULL == temp){
+		cout &lt;&lt; &quot;error&quot; &lt;&lt; endl;
+		return 1;
+	}
+	
+	array = temp;
+	
+	for(int i = 0 ; i &lt; newnum ; i ++)
+		cout &lt;&lt; array[i] &lt;&lt; endl;
+	
+	delete [] array;
+	
+	return 0;
+}
+```
+realloc系のエラー処理を書いているので長い。
+
+
+!Renew関数
+```
+int *Renew(int *array, int oldnum, int newnum){
+	
+	int *temp = new int[newnum];
+	
+	if(oldnum &gt; newnum){
+		for(int i = 0 ; i &lt; newnum ; i ++)
+			temp[i] = array[i];
+	}
+	
+	else{
+		for(int i = 0 ; i &lt; oldnum ; i ++)
+			temp[i] = array[i];
+	}
+	
+	delete[] array;
+	
+	return temp;
+}
+```
+newとdeleteを使って新しい配列の作成、古い配列の削除をしている。
+そして、中身を新しい配列にコピーしている。
+
+!実行結果
+```
+Input number of Array
+20
+Input New number of Array
+10
+0
+1
+4
+9
+16
+25
+36
+49
+64
+81
 ```</pre>
 </div>
 <div created="20160914065532510" modified="20160914065629626" tags="マニピュレータ?" title="set/resetiosflagsの実験">
@@ -8724,34 +8845,76 @@ int main(){
 
 ソースの拡張子は''xxxx.cpp''になります。</pre>
 </div>
-<div created="20160914082029348" modified="20160914082120794" tags="基本拡張" title="関数の拡張">
+<div created="20160914085052104" modified="20160914085203115" tags="newとdelete" title="可変長配列を作る">
+<pre>今まではmallocを使ってきたが、ごく普通にnew+配列的宣言で動的確保される様になりました。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+```
+特になし。
+
+!main関数
+```
+int main(void){
+	
+	int num;
+	
+	cin &gt;&gt; num;
+	
+	int *array = new int[num];
+	
+	for(int i = 0 ; i &lt; num ; i ++)
+		array[i] = i * i;
+	
+	for(int i = 0 ; i &lt; num ; i ++)
+		cout &lt;&lt; array[i] &lt;&lt; endl;
+	
+	delete [] array;
+	
+	return 0;
+}
+```
+変数numに配列の要素数を受け取り、それを元に
+
+``int *array = new int[num];``
+
+の行で実際に配列を作っている。
+配列がnewで作られると自動的に配列の中身が0クリアされる。
+
+!実行結果
+```
+20
+0
+1
+4
+9
+16
+25
+36
+49
+64
+81
+100
+121
+144
+169
+196
+225
+256
+289
+324
+361
+```</pre>
+</div>
+<div created="20160914082029348" modified="20160914084749899" tags="基本拡張" title="関数の拡張">
 <pre>次は関数の拡張です。
 これら拡張はクラスの''メソッド''でも有効です。
 メソッドとは''クラス内に含まれる関数の事''です。
 オブジェクト指向はカタカナ多すぎ。
 
-&lt;&lt;toc '関数の拡張'&gt;&gt;
-
-!!デフォルト引数
-[[引数に初期化|DefaultArgs]]
-
-!参照型引数
-[[参照渡し|ReferenceArgs]]
-
-!参照型返り値
-[[逆参照渡し|ReferenceReturn]]
-
-!定数型引数
-[[変更する必要がない場合はconst|ConstArgs]]
-
-!定数型返り値
-[[返り値をただ読むだけに使わせたい場合はconst|ConstReturn]]
-
-!オーバーロード
-[[同じ名前で違う動作|OverLoad]]
-
-!テンプレート
-[[複数の型に対応した関数|TemplateFunction]]</pre>
+&lt;&lt;toc '関数の拡張'&gt;&gt;</pre>
 </div>
 <div created="20160914054014193" modified="20160914055911124" tags="TableOfContents" title="基本拡張" type="text/vnd.tiddlywiki">
 <pre>&lt;&lt;toc '基本拡張'&gt;&gt;</pre>
@@ -8929,17 +9092,11 @@ My name is leico.
 I am 21 years old.
 ```</pre>
 </div>
-<div created="20160914081411041" modified="20160914081455334" tags="変数の拡張" title="定数型">
+<div created="20160914081411041" modified="20160914084725015" tags="変数の拡張" title="定数型">
 <pre>constを頭に付けた変数は初期化以降、変更が出来なくなり一種defineの様に機能する。
 ちょっと長くなるので2つに分ける。
 
-&lt;&lt;toc '定数型'&gt;&gt;
-
-!defineの様に使う。
-[[普通なconst|ConstValueDef]]
-
-!ポインタとconstのカオス
-[[ポインタと混ざってカオス|ConstValuePointer]]</pre>
+&lt;&lt;toc '定数型'&gt;&gt;</pre>
 </div>
 <div created="20160914083517923" modified="20160914083629837" tags="関数の拡張" title="同じ名前で違う動作">
 <pre>同じ名前でも違う動作を行う事が出来る様な拡張をオーバーロードという。
@@ -8995,19 +9152,61 @@ float Abs(float num){
 21:21.5643
 ```</pre>
 </div>
-<div created="20160914083644076" modified="20160914084303230" tags="関数の拡張" title="複数の型に対応した関数">
+<div created="20160914084925557" modified="20160914085033766" tags="newとdelete" title="配列を作る">
+<pre>!配列を作る。
+配列をnew,deleteを使って作ってみる。
+
+!ヘッダ
+```
+#include &lt;iostream&gt;
+using namespace std;
+```
+
+特になし。
+
+!main関数
+```
+int main(void){
+	
+	int *array = new int[10];
+	
+	for(int i = 0 ; i &lt; 10 ; i ++)
+		array[i] = i * i;
+	
+	for(int i = 0 ; i &lt; 10 ; i ++)
+		cout &lt;&lt; array[i] &lt;&lt; endl;
+	
+	delete[] array;
+	
+	return 0;
+}
+```
+今回は配列を用意している。new演算子が返す値、delete演算子が受け取る値はポインタなので、
+ポインタ型を用意して配列の様に使っている。配列を作る時は``型名[]``という書き方をし、
+消す時は``delete[]``という書き方をする。
+
+!実行結果
+```
+0
+1
+4
+9
+16
+25
+36
+49
+64
+81
+```</pre>
+</div>
+<div created="20160914083644076" modified="20160914084803099" tags="関数の拡張" title="複数の型に対応した関数">
 <pre>!イミフ関数拡張
 テンプレートという変態拡張がC++で追加されました。
 テンプレートを使うと様々な型に対応した関数が作れるようになります。
 分かりにくいので2つに分けます。
 
 &lt;&lt;toc '複数の型に対応した関数'&gt;&gt;
-
-!引数が一つの場合のテンプレート
-[[まずは一つでわかりやすく。|TemplateFunctionArg]]
-
-!引数が複数の場合のテンプレート
-[[2つ以上の引数を持ってみる。|TemplateFunctionArgs]]</pre>
+</pre>
 </div>
 <div created="20160914071937554" modified="20160914072104862" tags="Cppの入出力" title="文字列から入出力">
 <pre>わけがわからない拡張があります。
