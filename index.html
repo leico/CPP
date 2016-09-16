@@ -143,6 +143,8 @@ Error message and password prompt
 
 <li>$:/state/toc/TableOfContents-基本拡張-497309061</li>
 
+<li>$:/state/toc/TableOfContents-便利なSTL--81657105</li>
+
 <li>$:/state/toc/クラス-継承--81657105</li>
 
 <li>$:/state/toc/関数の拡張-複数の型に対応した関数--81657105</li>
@@ -161,6 +163,8 @@ Error message and password prompt
 
 <li>$:/state/toc/変数の拡張-定数型--81657105</li>
 
+<li>$:/state/toc/便利なSTL-String文字列--81657105</li>
+
 <li>$:/StoryList</li>
 
 <li>$:/temp/info-plugin</li>
@@ -172,6 +176,8 @@ Error message and password prompt
 <li>$:/themes/tiddlywiki/vanilla</li>
 
 <li>2つ以上の引数を持ってみる。</li>
+
+<li>Char配列に変換</li>
 
 <li>cinとかは何者？</li>
 
@@ -194,6 +200,8 @@ Error message and password prompt
 <li>set/resetiosflagsの実験</li>
 
 <li>setwの実験</li>
+
+<li>String文字列</li>
 
 <li>TableOfContents</li>
 
@@ -249,6 +257,8 @@ Error message and password prompt
 
 <li>継承の初歩</li>
 
+<li>検索する</li>
+
 <li>参照型</li>
 
 <li>参照型引数</li>
@@ -279,11 +289,21 @@ Error message and password prompt
 
 <li>配列を作る</li>
 
+<li>比較演算子で比較できる</li>
+
+<li>部分文字列の抽出</li>
+
 <li>複数の型に対応した関数</li>
 
 <li>複数の継承</li>
 
 <li>文字列から入出力</li>
+
+<li>文字列の長さ</li>
+
+<li>文字列の連結</li>
+
+<li>文字列を代入できる</li>
 
 <li>変更する必要がない場合はconst</li>
 
@@ -291,9 +311,13 @@ Error message and password prompt
 
 <li>返り値をただ読むだけに使わせたい場合はconst</li>
 
+<li>便利なSTL</li>
+
 <li>名前空間</li>
 
 <li>名前空間を作ると管理しやすくなるぞ</li>
+
+<li>要素へのアクセス</li>
 
 <li>例外処理</li>
 
@@ -8009,13 +8033,16 @@ Hello World
 <div created="20160914065631724" modified="20160914084816383" title="$:/state/toc/Cppの入出力-マニピュレータ?--81657105">
 <pre>close</pre>
 </div>
-<div created="20160915024959712" modified="20160915090009688" title="$:/state/toc/TableOfContents-クラス--81657105">
-<pre>open</pre>
+<div created="20160915024959712" modified="20160916092841443" title="$:/state/toc/TableOfContents-クラス--81657105">
+<pre>close</pre>
 </div>
-<div created="20160914055913111" modified="20160915020745157" title="$:/state/toc/TableOfContents-基本拡張--81657105">
+<div created="20160914055913111" modified="20160916092838677" title="$:/state/toc/TableOfContents-基本拡張--81657105">
 <pre>close</pre>
 </div>
 <div created="20160914100235996" modified="20160914100235996" title="$:/state/toc/TableOfContents-基本拡張-497309061">
+<pre>open</pre>
+</div>
+<div created="20160916094028287" modified="20160916094028287" title="$:/state/toc/TableOfContents-便利なSTL--81657105">
 <pre>open</pre>
 </div>
 <div created="20160915054421933" modified="20160915085336182" title="$:/state/toc/クラス-継承--81657105">
@@ -8045,7 +8072,10 @@ Hello World
 <div created="20160914081718765" modified="20160914084730355" title="$:/state/toc/変数の拡張-定数型--81657105">
 <pre>close</pre>
 </div>
-<div list="テンプレートクラス" title="$:/StoryList">
+<div created="20160916094239874" modified="20160916094239874" title="$:/state/toc/便利なSTL-String文字列--81657105">
+<pre>open</pre>
+</div>
+<div list="String文字列" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8221,6 +8251,46 @@ T1 Plus(T1 a, T2 b){
 !実行結果
 ```
 82.4
+```</pre>
+</div>
+<div created="20160916094735313" modified="20160916094828297" tags="String文字列" title="Char配列に変換">
+<pre>char配列しか受け取らないメソッドや関数に対し、char配列を出力出来るようになっている。
+
+!メイン文
+!!ヘッダ
+```
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+```
+いつもの感じ。
+
+!!!main関数
+```
+int main(void){
+
+	string str(&quot;This is Char *&quot;);
+	char buff[1024];
+	
+	strcpy(buff, str.c_str());
+	
+	cout &lt;&lt; str  &lt;&lt; endl;
+	cout &lt;&lt; buff &lt;&lt; endl;
+
+	return 0;
+}
+```
+strcpy関数はchar配列しか受け取りません。
+この様なときは
+
+``string.c_str()``
+
+を使う事で返り値にchar配列が返されます。
+
+!!実行結果
+```
+This is Char *
+This is Char *
 ```</pre>
 </div>
 <div created="20160914070309612" modified="20160914070522169" tags="Cppの入出力" title="cinとかは何者？">
@@ -8795,6 +8865,15 @@ for文は0〜20までの値を10進数、8進数、16進数で表示させてい
    19   13   23
 ```
 5桁左揃えで3つの進数の値が表示される。
+</pre>
+</div>
+<div created="20160916092926757" list="文字列を代入できる 比較演算子で比較できる 文字列の連結 文字列の長さ Char配列に変換 要素へのアクセス 部分文字列の抽出 検索する" modified="20160916102546716" tags="便利なSTL" title="String文字列">
+<pre>C++を使おうとした原因にこのstring型を挙げる人は多いと思います。
+string型は文字列を扱う専門のクラスです。string型を使うとchar配列を操作する場合よりも、
+より簡単に文字列を扱う事ができます。
+ともかくプログラムを見てみます。
+
+&lt;&lt;toc 'String文字列'&gt;&gt;
 </pre>
 </div>
 <div caption="{{$:/language/SideBar/Contents/Caption}}" created="20160914051953891" list="基本拡張 クラス" list-after="$:/core/ui/SideBar/Open" modified="20160915081101947" tags="$:/tags/SideBar" title="TableOfContents" type="text/vnd.tiddlywiki">
@@ -10846,6 +10925,70 @@ Calling Child Fx2
 Called Inheritance Fx
 ```</pre>
 </div>
+<div created="20160916102235263" modified="20160916102503274" tags="String文字列" title="検索する">
+<pre>stringクラスが所持している文字列から特定の文字や文字列を検索する事ができます。
+
+!メイン文
+!!ヘッダ
+```
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+```
+いつもの。
+
+!!main関数
+```
+int main(void){
+
+	string              str(&quot;この先生きのこる&quot;);
+	string :: size_type find;
+
+	find = str.find(&quot;生&quot;);
+	cout &lt;&lt; ((find == string :: npos) ? &quot;404&quot; : str.substr(find)) &lt;&lt; endl;
+	
+	find = str.rfind(&quot;の&quot;);
+	cout &lt;&lt; ((find == string :: npos) ? &quot;404&quot; : str.substr(find)) &lt;&lt; endl;
+	
+	return 0;
+}
+```
+
+文字列を検索して、先頭から何文字目かを返すメソッドをここでは2つ使っています。
+
+``string.find(探す文字列)``
+
+このメソッドは前から探索をします。一方、
+
+``string.rfind(探す文字列)``
+
+こちらのメソッドは後ろから探索をします。
+返り値は``string :: size_type``型となります。''初めてフルネームで記述する型''が出てきました。
+
+見つけた場合は見つけた場所が、見つからなかった場合は``string :: npos``が返り値として与えられます。
+
+この'' string :: npos という値は string :: size_type 型でなければ受け取る事ができません。''
+
+返り値はsubstrメソッドなどで利用可能です。
+
+!!実行結果
+```
+生きのこる
+のこる
+```
+
+```
+　　　　_,,...,_
+　　/_~,,..::: ~&quot;'ヽ
+　(,,&quot;ヾ　 ii　/^',)
+　 　 :i　　　 i&quot;
+　　　 | (,,ﾟДﾟ)
+　　　 |（ﾉ　　|） 　　
+　　　 | 　　　|
+　　　 ヽ ＿ノ
+　　　 　U&quot;U 
+```</pre>
+</div>
 <div created="20160914081227089" modified="20160914081340133" tags="変数の拡張" title="参照型">
 <pre>ポインタ型に拡張が加わりました。
 
@@ -12147,6 +12290,192 @@ int main(void){
 81
 ```</pre>
 </div>
+<div created="20160916094237443" modified="20160916094333062" tags="String文字列" title="比較演算子で比較できる">
+<pre>特に書くことも無いでしょう
+
+!メイン文
+!!ヘッダ
+```
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+using namespace std;
+```
+stringインクルードといつもの。
+
+!!main関数
+```
+int main(void){
+	
+	string str1(&quot;わんわんお！&quot;);
+
+	cout &lt;&lt; str1;
+	if (str1 == &quot;わんわんお！&quot;) {
+		cout &lt;&lt; &quot;（＾ω＾Ｕ）&quot; &lt;&lt;endl;
+	}
+
+	return 0;
+}
+```
+比較中
+
+!!実行結果
+```
+わんわんお！（＾ω＾Ｕ）
+```
+（ ＾ω＾）おっ</pre>
+</div>
+<div created="20160916095103975" modified="20160916102112560" tags="String文字列" title="部分文字列の抽出">
+<pre>文字列の一部分だけを取り出す処理もstringクラスは用意されています。
+
+!メイン分
+!!ヘッダ
+```
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+void Piramid(const string&amp; str);
+void Pickup (const string&amp; str);
+```
+
+いつものに加え、const string参照型を引数に持つ関数を２つ定義している。
+
+''stringクラス等、サイズが大きなクラスを引数にする場合は参照型を利用しましょう。''
+普通に渡してしまうとコピーが行われるので倍のメモリを占有します。
+
+main関数が長くなったので、関数に分けました。
+
+!!main関数
+```
+int main(void){
+	
+	string str(26, NULL);
+	
+	for (int i = 0 ; i &lt; 26 ; i ++)
+		str.at(i) = 'A' + i;
+
+	cout &lt;&lt; str &lt;&lt; endl;
+	
+	Piramid(str);
+	Pickup(str);
+	
+	return 0;
+}
+```
+前半は前のatメソッドの回をそのまま流用しています。
+でわ、後半の２つの関数を見てみます。
+
+!!Piramid関数
+```
+void Piramid(const string&amp; str){
+	
+	for (int i = 25 ; i &gt; -1; i --){
+		
+		for (int j = 0 ; j &lt; i  ; j ++)
+			cout &lt;&lt; &quot; &quot;;
+		
+		cout &lt;&lt; str.substr(i) &lt;&lt; endl;
+	}	
+
+	return;
+}
+```
+
+三角形型に文字列を出力するプログラムです。
+forでZ→Aを回しています。
+その際、出力されない文字列はスペースを出力させています。
+ある場所から最後までの文字列を返り値に持つメソッドがその最後に登場しています。
+
+``string.substr(先頭位置)``
+
+実行結果をお楽しみに。
+
+!!Pickup関数
+```
+void Pickup(string str){
+
+	for (int i = 0 ; i &lt; 26 ; i ++) {
+		
+		int space = (i &gt; 4) ? i - 4 : 0;
+		int end   = (i &gt; 4) ? 5     : i + 1;
+		
+		for (int j = 0; j &lt; space; j ++)
+			cout &lt;&lt; &quot; &quot;;
+		
+		cout &lt;&lt; str.substr(space, end);
+		cout &lt;&lt; endl;
+	}
+	
+	return;
+}
+```
+
+斜めに文字を出力します。
+space、並びにendはどこからどの文字列を出力するか、
+又、どの程度をスペースで埋めるかを計算した値を代入しています。
+今度は２点間の文字列を出力しています。
+
+``string.substr(先頭位置, 文字数)``
+
+実行結果をお楽しみに。
+
+!!実行結果
+```
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                         Z
+                        YZ
+                       XYZ
+                      WXYZ
+                     VWXYZ
+                    UVWXYZ
+                   TUVWXYZ
+                  STUVWXYZ
+                 RSTUVWXYZ
+                QRSTUVWXYZ
+               PQRSTUVWXYZ
+              OPQRSTUVWXYZ
+             NOPQRSTUVWXYZ
+            MNOPQRSTUVWXYZ
+           LMNOPQRSTUVWXYZ
+          KLMNOPQRSTUVWXYZ
+         JKLMNOPQRSTUVWXYZ
+        IJKLMNOPQRSTUVWXYZ
+       HIJKLMNOPQRSTUVWXYZ
+      GHIJKLMNOPQRSTUVWXYZ
+     FGHIJKLMNOPQRSTUVWXYZ
+    EFGHIJKLMNOPQRSTUVWXYZ
+   DEFGHIJKLMNOPQRSTUVWXYZ
+  CDEFGHIJKLMNOPQRSTUVWXYZ
+ BCDEFGHIJKLMNOPQRSTUVWXYZ
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+A
+AB
+ABC
+ABCD
+ABCDE
+ BCDEF
+  CDEFG
+   DEFGH
+    EFGHI
+     FGHIJ
+      GHIJK
+       HIJKL
+        IJKLM
+         JKLMN
+          KLMNO
+           LMNOP
+            MNOPQ
+             NOPQR
+              OPQRS
+               PQRST
+                QRSTU
+                 RSTUV
+                  STUVW
+                   TUVWX
+                    UVWXY
+                     VWXYZ
+```</pre>
+</div>
 <div created="20160914083644076" modified="20160914084803099" tags="関数の拡張" title="複数の型に対応した関数">
 <pre>!イミフ関数拡張
 テンプレートという変態拡張がC++で追加されました。
@@ -12361,6 +12690,139 @@ a
 pen.
 ```</pre>
 </div>
+<div created="20160916094549271" modified="20160916094703181" tags="String文字列" title="文字列の長さ">
+<pre>文字列の長さを調べるにはstringクラスのメソッドを使います。
+
+!メイン文
+!!ヘッダ
+```
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+```
+いつもの。
+
+!!main関数
+```
+int main(void){
+
+	string str;
+	
+	if (str.empty()) {
+		cin &gt;&gt; str;
+	}
+	
+	cout &lt;&lt; str.size() &lt;&lt; endl;
+	cout &lt;&lt; str        &lt;&lt; endl;
+	return 0;
+}
+```
+文字列が空か否かを調べるには
+
+``string.empty()``
+
+を使います。おそらくbool型が返ってきます。
+又、文字列の長さを調べるには
+
+``string.size()``
+
+を使います。
+そしてcinまで使えてしまうという。。。
+
+!!実行結果
+```
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+26
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+```
+上段のアルファベットは入力時のものです。</pre>
+</div>
+<div created="20160916094354064" modified="20160916094532951" tags="String文字列" title="文字列の連結">
+<pre>char配列を連結するにはって考えるととてもめんどくさい。
+でもstringクラスでは一発。
+
+!メイン文
+!!ヘッダ
+```
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+```
+いつもの
+
+!!main関数
+```
+int main(void){
+	
+	string str(&quot;わんわんお！&quot;);
+	
+	str = str + &quot;（＾ω＾Ｕ）&quot;;
+	
+	cout &lt;&lt; str &lt;&lt; endl;
+	
+	return 0;
+}
+```
+連結に``+``演算子を使う事が出来る。
+
+
+
+''Σ(ﾟДﾟ；ｴｰｯ!  ''
+
+!!実行結果
+```
+わんわんお！（＾ω＾Ｕ）
+```
+
+
+''//Σ(ﾟДﾟ；ｴｰｯ!  //''</pre>
+</div>
+<div created="20160916094046032" modified="20160916094222003" tags="String文字列" title="文字列を代入できる">
+<pre>!メイン文
+!!ヘッダ
+```
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+```
+いつものiostreamに加え、stringをインクルードしています。
+今回は``using namespace std;``を行なっていません。
+
+!!main関数
+```
+int main(void){
+	
+	std :: string str1;
+	std :: string str2(&quot;abcde&quot;);
+	
+	std :: cout &lt;&lt; &quot;str1 : &quot; &lt;&lt; str1 &lt;&lt; std :: endl;
+	std :: cout &lt;&lt; &quot;str2 : &quot; &lt;&lt; str2 &lt;&lt; std :: endl;
+	
+	str1 = str2;
+	str2 = &quot;ABCDE&quot;;
+
+	std :: cout &lt;&lt; &quot;str1 : &quot; &lt;&lt; str1 &lt;&lt; std :: endl;
+	std :: cout &lt;&lt; &quot;str2 : &quot; &lt;&lt; str2 &lt;&lt; std :: endl;
+	
+	return 0;
+}
+```
+''stringクラスもstd名前空間内に含まれる様です。''という説明のためにusing〜をしませんでした。
+こうみると、stdが付いているだけでなんだかとっても分かりにくいですね。
+
+stringクラスとして2つをインスタンス化しています。
+片方はコンストラクタ引数無し、片方は``abcde``という引数を渡して初期化しています。
+双方を出力後、str1の方にstr2を代入し、str2の方には``ABCDE``という文字列を''代入''しています。
+char配列ではstrcpy関数を使うなどしなければ無理でしたがこの様に文字列の代入が出来ます。
+本当か否かは実行結果で。
+
+!実行結果
+```
+str1 : 
+str2 : abcde
+str1 : abcde
+str2 : ABCDE
+```</pre>
+</div>
 <div created="20160914082909741" modified="20160914083045738" tags="関数の拡張" title="変更する必要がない場合はconst">
 <pre>constが付くと変更が出来なくなるというのを変数拡張の辺りでやっているはず。
 それを引数で使うとどうなるのかをやってみる。
@@ -12531,6 +12993,9 @@ int* const Fx3 (void){
 ```
 値変更出来ないのがコメントアウトを消すと分かると思う。</pre>
 </div>
+<div created="20160916092848008" modified="20160916092923192" tags="TableOfContents" title="便利なSTL">
+<pre>&lt;&lt;toc '便利なSTL'&gt;&gt;</pre>
+</div>
 <div created="20160914100555470" modified="20160914100847196" tags="基本拡張" title="名前空間">
 <pre>C++では全ての要素に名前空間という苗字の様な物を付けることが出来る。
 
@@ -12599,6 +13064,60 @@ namespace Test{
 !実行結果
 ```
 2.82843
+```</pre>
+</div>
+<div created="20160916094845803" modified="20160916095034451" tags="String文字列" title="要素へのアクセス">
+<pre>char配列の場合、
+``char[num]``
+という形で要素毎に変更が出来ました。
+今回はstring型としてコレをやってみます。
+
+!メイン文
+!!ヘッダ
+```
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+```
+いつもの感じ。
+
+!!main関数
+```
+int main(void){
+
+	string str(26,NULL);
+	
+	cout &lt;&lt; str.size() &lt;&lt; endl;
+	
+	for (int i = 0 ; i &lt; 26 ; i ++)
+		str.at(i) = 'A' + i;
+	
+	cout &lt;&lt; str &lt;&lt;endl;
+	return 0;
+}
+```
+始めにstringクラスをインスタンス化する時、
+
+``string(サイズ,埋める文字)``
+
+というコンストラクタを使ってアルファベットの分の領域を作っています。
+その後、forの中で１要素ずつA〜Zを入力しています。この時用いているのは
+
+``string.at(要素数)``
+
+というメソッドです。尚、
+
+``string[要素数]``
+
+という書き方も可能ですが、''前者であれば変な場所にアクセスした時にしっかりとエラーを吐いてくれます。''
+
+''一方で、後者の方が高速に動作します。''
+状況に合わせて選択しましょう。
+
+!!実行結果
+```
+26
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
 ```</pre>
 </div>
 <div created="20160914101139874" modified="20160914101355254" tags="基本拡張" title="例外処理">
